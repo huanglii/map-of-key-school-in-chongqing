@@ -1,0 +1,30 @@
+{
+  "printWidth": 120,
+  "overrides": [
+    {
+      "files": ".prettierrc"
+    }
+  ],
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": false,
+  "singleQuote": true,
+  "proseWrap": "preserve",
+  "arrowParens": "always",
+  "bracketSpacing": true,
+  "endOfLine": "auto",
+  "eslintIntegration": false,
+  "htmlWhitespaceSensitivity": "ignore",
+  "ignorePath": ".prettierignore",
+  "jsxBracketSameLine": false,
+  "jsxSingleQuote": false,
+  "stylelintIntegration": false,
+  "trailingComma": "es5",
+  "no-multiple-empty-lines": [
+    1,
+    {
+      "max": 2
+    }
+  ]
+}

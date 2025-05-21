@@ -1,50 +1,22 @@
 import 'mapbox-gl/dist/mapbox-gl.css'
 import MapboxMap from './components/MapboxMap'
-import { useMapContext } from './components/MapboxMap/useMapContext'
-import { useEffect } from 'react'
+import SearchBar from './components/SearchBar'
+import type { DataItem } from './components/SearchBar/SearchEngine'
+import { useState } from 'react'
+import InfoPanel from './components/InfoPanel'
 
-const ChildComponent: React.FC = () => {
-  const { map } = useMapContext()
+const App = () => {
+  const [item, setItem] = useState<DataItem>()
+  const onSelect = (item?: DataItem) => {
+    setItem(item)
+  }
 
-  useEffect(() => {
-    if (map) {
-      // 使用 map 对象
-      map.addLayer({
-        id: 'layer-id',
-        type: 'circle',
-        source: {
-          type: 'geojson',
-          data: {
-            type: 'FeatureCollection',
-            features: [
-              {
-                type: 'Feature',
-                geometry: {
-                  type: 'Point',
-                  coordinates: [-74.5, 40],
-                },
-                properties: {},
-              },
-            ],
-          },
-        },
-        paint: {
-          'circle-radius': 10,
-          'circle-color': '#f00',
-        },
-      })
-    }
-  }, [map])
-
-  return null
-}
-
-const MapboxExample = () => {
   return (
     <MapboxMap>
-      <ChildComponent />
+      <SearchBar onSelect={onSelect} />
+      {item && <InfoPanel item={item} onClose={() => setItem(undefined)} />}
     </MapboxMap>
   )
 }
 
-export default MapboxExample
+export default App

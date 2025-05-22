@@ -1,7 +1,7 @@
 {
   "name": "map-of-key-school-in-chongqing",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,13 +10,21 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons": "^6.0.0",
     "@tailwindcss/vite": "^4.1.7",
+    "antd": "^5.25.2",
+    "jieba": "^1.0.0",
+    "jieba-js": "^1.0.2",
+    "jieba-zh-cn": "^1.0.12",
+    "js-jieba": "^1.0.12",
     "mapbox-gl": "^3.12.0",
+    "pinyin": "^2.11.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
+    "@types/pinyin": "^2.10.2",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react": "^4.4.1",

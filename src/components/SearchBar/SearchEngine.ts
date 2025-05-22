@@ -1,5 +1,6 @@
-import Pinyin from 'pinyin' // 需安装 pinyin 库：npm install pinyin
-import Jieba from 'js-jieba' // 需安装 jieba-js 库：npm install jieba-js
+import Pinyin from 'pinyin'
+import Jieba from 'js-jieba'
+// @ts-ignore
 import { JiebaDict, HMMModel, UserDict, IDF, StopWords } from 'jieba-zh-cn'
 
 // 中文分词（使用jieba）
@@ -50,10 +51,9 @@ export default class SearchEngine {
   /**
    * 模糊搜索主方法
    * @param {string} keyword - 搜索关键词（支持中文、拼音、首字母、混合输入）
-   * @param {boolean} [isStrict] - 是否开启严格模式（需匹配所有关键词段，默认false）
    * @returns {Array} 匹配结果数组（按匹配度排序）
    */
-  search(keyword: string, isStrict = false) {
+  search(keyword: string) {
     const cleanKeyword = keyword.trim().toLowerCase()
     if (!cleanKeyword) return []
 

@@ -9,23 +9,6 @@ interface SearchBarProps {
   onSelect?: (item?: DataItem) => void
 }
 
-function csvToArray(str: string, delimiter = ',') {
-  const headers = str.slice(0, str.indexOf('\n')).split(delimiter)
-  const rows = str.slice(str.indexOf('\n') + 1).split('\n')
-
-  return rows.map(function (row) {
-    const values = row.split(delimiter)
-    const el = headers.reduce(
-      function (object, header, index) {
-        object[header] = values[index]
-        return object
-      },
-      {} as Record<string, string>
-    )
-    return el
-  })
-}
-
 const SearchBar: FC<SearchBarProps> = (props) => {
   const engineRef = useRef<SearchEngine | null>(null)
   const searchResultRef = useRef<DataItem[]>([])
@@ -57,11 +40,13 @@ const SearchBar: FC<SearchBarProps> = (props) => {
   }, [])
 
   const initData = () => {
-    fetch('./school.csv')
-      .then((r) => r.text())
-      .then((text) => {
-        const arr = csvToArray(text)
-        engineRef.current = new SearchEngine(arr as any)
+    fetch('./school.geojson')
+      .then((r) => r.json())
+      .then((res: GeoJSON.FeatureCollection<GeoJSON.Point>) => {
+        const arr = res.features.map((item) => {
+          return item.properties as DataItem
+        })
+        engineRef.current = new SearchEngine(arr)
       })
   }
 
@@ -79,6 +64,14 @@ const SearchBar: FC<SearchBarProps> = (props) => {
   const onSelect = (value: string) => {
     const selectedItem = searchResultRef.current.find((item) => item.name === value)
     props.onSelect?.(selectedItem) // 返回完整item
+
+    // 缩放至
+    if (map && selectedItem) {
+      map.flyTo({
+        center: [+selectedItem.lon, +selectedItem.lat],
+        zoom: 15,
+      })
+    }
   }
 
   return (

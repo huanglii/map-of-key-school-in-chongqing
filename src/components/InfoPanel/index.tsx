@@ -32,7 +32,7 @@ const InfoPanel: FC<InfoPanelProps> = ({ item, ...props }) => {
     window.location.href = `amapuri://route/plan?dlon${item.lon}&dlat=${item.lat}&dname=${item.name}&dev=1&t=0`
   }
   return (
-    <div className="info-panel-float absolute bottom-0 left-0 w-full rounded-t-2xl p-4 bg-white/90 shadow-[0_-2px_16px_rgba(0,_0,_0,_0.08)]">
+    <div className="info-panel-float fixed bottom-0 left-0 w-full rounded-t-2xl p-4 bg-white/90 shadow-[0_-2px_16px_rgba(0,_0,_0,_0.08)]">
       <div>
         <div className="mb-2 text-xl font-bold">{item.name}</div>
         <div className="flex justify-between text-base">

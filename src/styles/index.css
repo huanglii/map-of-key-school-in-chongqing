@@ -11,3 +11,14 @@ body,
 .mapboxgl-ctrl-logo {
   display: none !important;
 }
+
+.mapboxgl-ctrl-top-left {
+  top: 4rem;
+  left: 0.5rem;
+}
+
+.ant-select-single {
+  height: auto;
+  border-radius: 7px;
+  box-shadow: 0 0 0 2px #0000001a;
+}

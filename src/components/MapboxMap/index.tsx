@@ -18,22 +18,24 @@ const MapboxMap: FC<MapboxMapProps> = (props) => {
       style: 'mapbox://styles/huanglii/cmaqrymop01em01si3gl1a50u',
       center: [106.5344, 29.6095],
       zoom: 10,
-      hash: true,
+      // hash: true,
       attributionControl: false,
     })
+    mapInstance.addControl(new mapboxgl.NavigationControl({
+      visualizePitch: true,
+    }), 'top-left')
 
     mapInstance.on('load', () => {
       setMap(mapInstance)
 
       mapInstance.addSource('school', {
-        type: 'vector',
-        url: 'mapbox://huanglii.cc6m38g4',
+        type: 'geojson',
+        data: './school.geojson',
       })
       mapInstance.addLayer({
         id: 'poi-label-school-1',
         type: 'symbol',
         source: 'school',
-        'source-layer': 'school-7pf3xh',
         layout: {
           'icon-image': 'school',
           'text-size': ['interpolate', ['linear'], ['zoom'], 10, 12, 15, 16],
@@ -59,8 +61,10 @@ const MapboxMap: FC<MapboxMapProps> = (props) => {
 
   return (
     <MapContext.Provider value={{ map }}>
-      <div ref={mapContainerRef} className="relative size-full" />
-      {props.children}
+      <div className="size-full">
+        <div ref={mapContainerRef} className="size-full" />
+        <div className="">{props.children}</div>
+      </div>
     </MapContext.Provider>
   )
 }

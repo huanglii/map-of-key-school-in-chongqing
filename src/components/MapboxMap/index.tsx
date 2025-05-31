@@ -21,9 +21,22 @@ const MapboxMap: FC<MapboxMapProps> = (props) => {
       // hash: true,
       attributionControl: false,
     })
-    mapInstance.addControl(new mapboxgl.NavigationControl({
-      visualizePitch: true,
-    }), 'top-left')
+    mapInstance.addControl(
+      new mapboxgl.NavigationControl({
+        visualizePitch: true,
+      }),
+      'top-left'
+    )
+    mapInstance.addControl(
+      new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true,
+        },
+        trackUserLocation: true,
+        showUserHeading: true,
+      }),
+      'top-left'
+    )
 
     mapInstance.on('load', () => {
       setMap(mapInstance)
@@ -43,6 +56,7 @@ const MapboxMap: FC<MapboxMapProps> = (props) => {
           'text-field': ['get', 'name'],
           'text-anchor': 'top',
           'text-offset': [0, 0.5],
+          'symbol-sort-key': ['get', 'rank'],
         },
         paint: {
           'text-halo-color': 'hsl(60, 20%, 98%)',
